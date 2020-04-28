@@ -108,6 +108,14 @@ ports:
     exposedPort: 443
     # nodePort: 32443
 
+# udpPorts configures UDP ports which need to go in a dedicated service because k8s does not support mixed protocols for
+# LoadBalancer services https://github.com/kubernetes/kubernetes/issues/23880
+udpPorts: {}
+#  stun:
+#    port: 3478
+#    expose: true
+#    exposedPort: 3478
+
 # Options for the main traefik service, where the entrypoints traffic comes
 # from.
 service:
@@ -126,6 +134,26 @@ service:
     # - 172.16.0.0/16
   externalIPs: []
     # - 1.2.3.4
+
+# udpService configures the dedicated UDP service because k8s does not support mixed protocols for
+# LoadBalancer services https://github.com/kubernetes/kubernetes/issues/23880
+udpService:
+  enabled: false
+  type: LoadBalancer
+  # Additional annotations (e.g. for cloud provider specific config)
+  annotations: {}
+  # Additional entries here will be added to the service spec. Cannot contains
+  # type, selector or ports entries.
+  spec: {}
+    # externalTrafficPolicy: Cluster
+    # loadBalancerIP: "1.2.3.4"
+    # clusterIP: "2.3.4.5"
+  loadBalancerSourceRanges: []
+    # - 192.168.0.1/32
+    # - 172.16.0.0/16
+  externalIPs: []
+    # - 1.2.3.4
+  
 
 ## Create HorizontalPodAutoscaler object.
 ##
