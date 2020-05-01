@@ -22,7 +22,7 @@ spec:
     app.kubernetes.io/name: {{ template "traefik.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
   ports:
-  {{- range $name, $config := .Values.ports }}
+  {{- range $name, $config := .Values.tcpPorts }}
   {{- if $config.expose }}
   - port: {{ default $config.port $config.exposedPort }}
     name: {{ $name }}
