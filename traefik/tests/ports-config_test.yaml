@@ -15,7 +15,7 @@ tests:
             name: web
             port: 80
             targetPort: web
-        template: service.yaml
+        template: tcp-svc.yaml
       - contains:
           path: spec.template.spec.containers[0].args
           content: "--entryPoints.web.address=:8000"
@@ -35,7 +35,7 @@ tests:
             name: websecure
             port: 443
             targetPort: websecure
-        template: service.yaml
+        template: tcp-svc.yaml
       - contains:
           path: spec.template.spec.containers[0].args
           content: "--entryPoints.websecure.address=:8443"
@@ -55,7 +55,7 @@ tests:
             name: traefik
             port: 9000
             targetPort: traefik
-        template: service.yaml
+        template: tcp-svc.yaml
       - contains:
           path: spec.template.spec.containers[0].args
           content: "--entryPoints.traefik.address=:9000"
@@ -80,7 +80,7 @@ tests:
             name: ssh
             port: 22
             targetPort: ssh
-        template: service.yaml
+        template: tcp-svc.yaml
       - contains:
           path: spec.template.spec.containers[0].args
           content: "--entryPoints.ssh.address=:22"
@@ -107,7 +107,7 @@ tests:
             name: ssh
             port: 22
             targetPort: ssh
-        template: service.yaml
+        template: tcp-svc.yaml
       - contains:
           path: spec.template.spec.containers[0].args
           content: "--entryPoints.ssh.address=:22"
