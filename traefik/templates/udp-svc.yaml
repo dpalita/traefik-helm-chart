@@ -1,6 +1,4 @@
-{{- if .Values.udp
-
-enabled -}}
+{{- if .Values.udpenabled -}}
 apiVersion: v1
 kind: Service
 metadata:
