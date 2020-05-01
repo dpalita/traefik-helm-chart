@@ -1,4 +1,4 @@
-{{- if .Values.service.enabled -}}
+{{- if .Values.tcpService.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -9,13 +9,13 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/instance: {{ .Release.Name }}
   annotations:
-  {{- with .Values.service.annotations }}
+  {{- with .Values.tcpService.annotations }}
   {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- $type := default "LoadBalancer" .Values.service.type }}
+  {{- $type := default "LoadBalancer" .Values.tcpService.type }}
   type: {{ $type }}
-  {{- with .Values.service.spec }}
+  {{- with .Values.tcpService.spec }}
   {{- toYaml . | nindent 2 }}
   {{- end }}
   selector:
@@ -33,12 +33,12 @@ spec:
   {{- end }}
   {{- end }}
   {{- if eq $type "LoadBalancer" }}
-  {{- with .Values.service.loadBalancerSourceRanges }}
+  {{- with .Values.tcpService.loadBalancerSourceRanges }}
   loadBalancerSourceRanges:
   {{- toYaml . | nindent 2 }}
   {{- end -}}
   {{- end -}}
-  {{- with .Values.service.externalIPs }}
+  {{- with .Values.tcpService.externalIPs }}
   externalIPs:
   {{- toYaml . | nindent 2 }}
   {{- end -}}
