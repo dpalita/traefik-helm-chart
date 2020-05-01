@@ -76,7 +76,7 @@ envFrom: []
 #     name: secret-name
 
 # Configure ports
-ports:
+tcpPorts:
   # The name of this one can't be changed as it is used for the readiness and
   # liveness probes, but you can adjust its config to your liking
   traefik:
@@ -118,7 +118,7 @@ udpPorts: {}
 
 # Options for the main traefik service, where the entrypoints traffic comes
 # from.
-service:
+tcpService:
   enabled: true
   type: LoadBalancer
   # Additional annotations (e.g. for cloud provider specific config)
