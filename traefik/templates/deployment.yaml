@@ -62,7 +62,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /ping
-            port: {{ .Values.ports.traefik.port }}
+            port: {{ .Values.tcpPorts.traefik.port }}
           failureThreshold: 1
           initialDelaySeconds: 10
           periodSeconds: 10
@@ -71,14 +71,14 @@ spec:
         livenessProbe:
           httpGet:
             path: /ping
-            port: {{ .Values.ports.traefik.port }}
+            port: {{ .Values.tcpPorts.traefik.port }}
           failureThreshold: 3
           initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 2
         ports:
-        {{- range $name, $config := .Values.ports }}
+        {{- range $name, $config := .Values.tcpPorts }}
         - name: {{ $name | quote }}
           containerPort: {{ $config.port }}
           {{- if $config.hostPort }}
@@ -115,7 +115,7 @@ spec:
           - {{ . | quote }}
           {{- end }}
           {{- end }}
-          {{- range $name, $config := .Values.ports }}
+          {{- range $name, $config := .Values.tcpPorts }}
           - "--entryPoints.{{$name}}.address=:{{ $config.port }}"
           {{- end }}
           {{- range $name, $config := .Values.udpPorts }}
