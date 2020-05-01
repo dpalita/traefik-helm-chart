@@ -1,6 +1,6 @@
 suite: Service configuration
 templates:
-  - service.yaml
+  - tcp-svc.yaml
 tests:
   - it: should be a type LoadBalancer by default
     asserts:
